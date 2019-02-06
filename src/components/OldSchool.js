@@ -20,7 +20,11 @@ export default class OldSchool extends React.Component {
         json.data.results.map(result => ({
           name: `${result.name.title} ${result.name.first} ${result.name.last}`,
           age: `${result.dob.age}`,
-          pic: result.picture.large
+          pictures: {
+            thumbnail: result.picture.thumbnail,
+            medium: result.picture.medium,
+            large: result.picture.large
+          }
         }))
       )
       .then(newData => this.setState({ users: newData }))
@@ -36,7 +40,9 @@ export default class OldSchool extends React.Component {
           <div>
             <div>{x.name}</div>
             <div>{x.age}</div>
-            <img key={x.pic} src={x.pic} />
+            <img key={x.pictures.thumbnail} src={x.pictures.thumbnail} />
+            <img key={x.pictures.medium} src={x.pictures.medium} />
+            <img key={x.pictures.large} src={x.pictures.large} />
           </div>
         ))}
       </ul>
