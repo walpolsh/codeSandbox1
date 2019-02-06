@@ -13,13 +13,20 @@ function reducer(state, action) {
 
 export default function HooksTest() {
   const [count, setCount] = React.useState(1);
+  const [count2, setCount2] = React.useState(0);
   const [name, setName] = React.useState("Paul");
   const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  function handleClick() {
+    setCount2(c => c + 9999);
+  }
+
   return (
     <>
       <div>
         Hooks! {name} {count} {state.people}
       </div>
+      <button onClick={handleClick}>{count2}</button>
       <button onClick={() => setCount(count * 2)}>Double Count!</button>
       <button onClick={() => setCount(1)}>Reset Count!</button>
       <button
