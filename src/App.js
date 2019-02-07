@@ -7,12 +7,7 @@ export default function App() {
   return (
     <div>
       <HooksTest />
-      <HooksFetch>
-        <p>dafgasf</p>
-      </HooksFetch>
-      <OldSchool>
-        <p>asgasgas</p>
-      </OldSchool>
+      <HooksFetch />
     </div>
   );
 }

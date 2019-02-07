@@ -15,10 +15,12 @@ export default class OldSchool extends React.Component {
 
   componentDidMount() {
     axios
-      .get("https://randomuser.me/api/?results=10")
+      .get("https://randomuser.me/api/?results=100")
       .then(json =>
         json.data.results.map(result => ({
-          name: `${result.name.title} ${result.name.first} ${result.name.last}`,
+          name: `${capitalize(result.name.title)} ${capitalize(
+            result.name.first
+          )} ${capitalize(result.name.last)}`,
           age: `${result.dob.age}`,
           pictures: {
             thumbnail: result.picture.thumbnail,
