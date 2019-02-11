@@ -1,9 +1,21 @@
 import React from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 const capitalize = ([first, ...rest], lowerRest = false) =>
   first.toUpperCase() +
   (lowerRest ? rest.join("").toLowerCase() : rest.join(""));
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+`;
+
+const Frames = styled.div`
+  width: 250px;
+  border: 1px solid black;
+`;
 
 export default function HooksFetch() {
   const [data, setData] = React.useState([]);
@@ -24,7 +36,7 @@ export default function HooksFetch() {
           },
           username: result.login.username,
           email: result.email,
-          gender: result.gender
+          gender: capitalize(result.gender)
         }))
       )
       .then(newData => newData)
@@ -37,19 +49,19 @@ export default function HooksFetch() {
     fetchData();
   }, []);
   return (
-    <ul>
+    <Container>
       {data.map(x => (
-        <div>
-          <div>{x.name}</div>
-          <div>{x.gender}</div>
-          <div>{x.email}</div>
-          <div>{x.username}</div>
-          <div>{x.age}</div>
+        <Frames>
           <img key={x.pictures.thumbnail} src={x.pictures.thumbnail} />
+          <div>Name: {x.name}</div>
+          <div>Gender: {x.gender}</div>
+          <div>Email: {x.email}</div>
+          <div>User: {x.username}</div>
+          <div>{x.age}</div>
           <img key={x.pictures.medium} src={x.pictures.medium} />
           <img key={x.pictures.large} src={x.pictures.large} />
-        </div>
+        </Frames>
       ))}
-    </ul>
+    </Container>
   );
 }
