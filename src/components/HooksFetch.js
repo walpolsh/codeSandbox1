@@ -1,10 +1,30 @@
 import React from "react";
 import axios from "axios";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const capitalize = ([first, ...rest], lowerRest = false) =>
   first.toUpperCase() +
   (lowerRest ? rest.join("").toLowerCase() : rest.join(""));
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const rotateReverse = keyframes`
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -13,8 +33,20 @@ const Container = styled.div`
 `;
 
 const Frames = styled.div`
-  width: 250px;
+  width: 400px;
   border: 1px solid black;
+
+  &:hover {
+    color: red;
+    animation: ${rotate} 2s linear infinite;
+  }
+`;
+
+const Section = styled.div`
+  &:hover {
+    color: blue;
+    animation: ${rotateReverse} 2s linear infinite;
+  }
 `;
 
 export default function HooksFetch() {
@@ -53,12 +85,13 @@ export default function HooksFetch() {
       {data.map(x => (
         <Frames>
           <img key={x.pictures.thumbnail} src={x.pictures.thumbnail} />
-          <div>Name: {x.name}</div>
-          <div>Gender: {x.gender}</div>
-          <div>Email: {x.email}</div>
-          <div>User: {x.username}</div>
-          <div>{x.age}</div>
-          <img key={x.pictures.medium} src={x.pictures.medium} />
+          <Section>
+            <div>Name: {x.name}</div>
+            <div>Gender: {x.gender}</div>
+            <div>Email: {x.email}</div>
+            <div>User: {x.username}</div>
+            <div>Age: {x.age}</div>
+          </Section>
           <img key={x.pictures.large} src={x.pictures.large} />
         </Frames>
       ))}
