@@ -21,7 +21,10 @@ export default function HooksFetch() {
             thumbnail: result.picture.thumbnail,
             medium: result.picture.medium,
             large: result.picture.large
-          }
+          },
+          username: result.login.username,
+          email: result.email,
+          gender: result.gender
         }))
       )
       .then(newData => newData)
@@ -38,6 +41,9 @@ export default function HooksFetch() {
       {data.map(x => (
         <div>
           <div>{x.name}</div>
+          <div>{x.gender}</div>
+          <div>{x.email}</div>
+          <div>{x.username}</div>
           <div>{x.age}</div>
           <img key={x.pictures.thumbnail} src={x.pictures.thumbnail} />
           <img key={x.pictures.medium} src={x.pictures.medium} />
